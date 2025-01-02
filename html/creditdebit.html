@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="creditdebit.css">
+    <title>Credit/Debit Card Payment</title>
+
+</head>
+<body>
+    <div class="payment-container">
+        <!-- Left Section: Payment Form -->
+        <div class="payment-form">
+            <h1>Credit/Debit Card Payment</h1>
+            <h2>Debit/Credit</h2>
+            <form>
+                <div class="form-group">
+                    <label for="cardholder">Cardholder's Name</label>
+                    <input type="text" id="cardholder" placeholder="Enter cardholder's name">
+                </div>
+
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" placeholder="Enter card number">
+                </div>
+
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <input type="text" placeholder="Expiry" style="flex: 1;">
+                    <input type="text" placeholder="CVC" style="flex: 1;">
+                </div>
+
+                <div class="form-group discount">
+                    <input type="text" placeholder="Discount Code">
+                    <button type="button">Apply</button>
+                </div>
+
+                <div class="payment-buttons">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="pay-btn">Pay</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Section: Payment Summary -->
+        <div class="payment-summary">
+            <div class="summary-header">
+                <h2>You're paying,</h2>
+                <p class="summary-total">RM10.00</p>
+            </div>
+
+            <div class="summary-details">
+                <p><strong>Laksa Biasa</strong></p>
+                <p>Remarks: No Remarks</p>
+                <hr>
+                <p>Discounts & Offers: RM 0.00</p>
+                <p>Tax: RM 0.00</p>
+                <hr>
+                <p>Total: RM10.00</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
