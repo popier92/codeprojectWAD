@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($user['role'] === 'admin') {
                 header("Location: addashboard.php") ;
             } else {
-                header( "Location: cusdashboard.php");
+                header( "Location: cusdashboard.html");
             }
             exit();
         } else {
