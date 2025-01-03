@@ -160,7 +160,7 @@ nav a:hover {
     background-color: #ddd;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
     color: #f5f0f0;
     font-size: 18px;
