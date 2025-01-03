@@ -43,32 +43,69 @@
         <h1>Monthly Sales Report</h1>
         <div class="pie-chart">
             <!--Graph Placeholder (Insert your chart or visualization here)-->
-            <canvas id="myChart" style="width: 400x;;max-width:400px"></canvas>
-
+            <canvas id="order-chart" width="100" height="100" style="width: 200x;;max-width:200px"></canvas>
+            <canvas id="growth-chart" width="100" height="100" style="width: 200x;;max-width:200px"></canvas>
+            <canvas id="revenue-chart" width="100" height="100" style="width: 200x;;max-width:200px"></canvas>
             <script>
-                var yValues = [55, 49,];
+                var yValues = [26, 49,60];
                 var barColors = [
                 "#b91d47",
                 "#f1bcbc"
                 ];
-
-                new Chart("myChart", 
+                new Chart("order-chart", 
                 {
                     type: "doughnut",
                     data: 
                     {
                         datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
+                            backgroundColor: ["#b91d47", "#f1bcbc"],
+                            data: [yValues[0],100-yValues[0]]
                         }]
                     },
-                    options: {
+                    options: 
+                    {
+                        title: {
+                            display: true,
+                        }
+                    }
+                });
+
+                new Chart("growth-chart", 
+                {
+                    type: "doughnut",
+                    data: 
+                    {
+                        datasets: [{
+                            backgroundColor: [ "#1de13a","#a8d6b8"],
+                            data: [yValues[1],100-yValues[1]]
+                        }]
+                    },
+                    options: 
+                    {
+                        title: {
+                            display: true,
+                        }
+                    }
+                });
+                new Chart("revenue-chart", 
+                {
+                    type: "doughnut",
+                    data: 
+                    {
+                        datasets: [{
+                            backgroundColor: ["#2a8ae9", "#9bbee1"],
+                            data: [yValues[2],100-yValues[2]]
+                        }]
+                    },
+                    options: 
+                    {
                         title: {
                             display: true,
                         }
                     }
                 });
             </script>
+            
         </div>
         <div class="total-orders">
 
