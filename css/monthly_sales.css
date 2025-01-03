@@ -157,7 +157,7 @@ nav a:hover {
     padding: 10px;
     width: 620px;
     height: 300px;
-    background-color: #ddd;
+    background-color: #f8f5f5;
     border-radius: 10px;
     display: flex;
     justify-content: top;
@@ -171,9 +171,9 @@ nav a:hover {
 .total-orders {
 
     padding: 10px;
-    width: 30%;
+    width: 400px;
     height: 300px;
-    background-color: #ddd;
+    background-color: #f8f5f5;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -187,14 +187,14 @@ nav a:hover {
 .revenue-diagram {
 
     padding: 10px;
-    width: 30%;
-    height: 300px;
-    background-color: #ddd;
+    width: 1000px;
+    height: 500px;
+    background-color: #f8f5f5;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #f5f0f0;
+    color: #ffffff;
     font-size: 18px;
     text-align: center;
     box-shadow: 5px 4px 6px rgba(0, 0, 0, 0.1);

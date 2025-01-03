@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>sr = "javascript/monthly_sales.js"</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/monthly_sales.css">
@@ -112,12 +113,11 @@
                 </div>
 
                 <div class="total-orders">
-
                 </div>
             </div>
             <h2>Total Revanue</h2>
             <div class="revenue-diagram">
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <canvas id="myChart" width="800" height="450" style="width:100%;max-width:600px"></canvas>
 
                 <script>
                     const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
