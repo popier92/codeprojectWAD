@@ -38,7 +38,7 @@
         </div>
 
         <!-- Main Content Section -->
-     <div class="main-content">
+     < class="main-content">
         <h1>Monthly Sales Report</h1>
         <div class="pie-chart">
             <!--Graph Placeholder (Insert your chart or visualization here)-->
@@ -56,6 +56,9 @@
                     <text x="55" y="66" text-anchor="middle" font-size="11" class="fwheadings">Total Orders</text>
                 </svg>
             </div>
+        </div>
+        <div class="total-orders">
+
         </div>
      </div>
     </div>
