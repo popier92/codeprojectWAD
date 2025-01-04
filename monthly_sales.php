@@ -70,6 +70,7 @@
                                 {
                                     title: {
                                         display: true,
+                                        text: "Total Orders"
                                     }
                                 }
                             });
@@ -88,6 +89,7 @@
                                 {
                                     title: {
                                         display: true,
+                                        text: "Growth"
                                     }
                                 }
                             });
@@ -105,6 +107,7 @@
                                 {
                                     title: {
                                         display: true,
+                                        text: "Renenue"
                                     }
                                 }
                             });
