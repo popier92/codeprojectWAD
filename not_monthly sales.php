@@ -17,7 +17,7 @@
             <img class="logo" src="icon/logo.jpeg" alt="Logo">
             <nav>
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="addashboard.php">Home</a></li>
                     <li><a href="#">Our Team</a></li>
                     <li><a href="#">Cart</a></li>
                     <li><a href="#">Transaction Details</a></li>
