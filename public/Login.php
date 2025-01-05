@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Return location header for redirection
             if ($user['role'] === 'admin') {
-                header("Location: addashboard.php") ;
+                header("Location: addashboard.html") ;
             } else {
-                header( "Location: cusdashboard.php");
+                header( "Location: cusdashboard.html");
             }
             exit();
         } else {
