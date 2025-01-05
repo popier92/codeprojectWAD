@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['Email'];
-    $password = $_POST['Password'];//test test
+    $password = $_POST['Password'];//test test this is the branch
 
     if (empty($email) || empty($password)) {
         echo "Invalid email or password"; // Response for JavaScript to handle
