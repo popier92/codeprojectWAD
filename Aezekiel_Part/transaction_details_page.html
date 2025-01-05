@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            background-color: #ffe6e6;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #f4b0b0;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ff9999;
+        }
+
+        .profile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .transaction-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .transaction-section {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .left-panel {
+            width: 60%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background-color: #ccc;
+        }
+
+        .product-item-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-panel {
+            width: 35%;
+            background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07));
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 148, 168, 0.5);
+            position: relative;
+        }
+
+        .product-summary {
+            margin-bottom: 20px;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .print-receipt {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #ffcc00;
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .print-receipt:hover {
+            background-color: #ffaa00;
+        }
+
+        @media (max-width: 768px) {
+            .transaction-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-panel, .right-panel {
+                width: 90%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <title>Transaction Details</title>
+</head>
+<body>
+    <header class="top-section">
+        <a href="home.html">
+            <img class="logo" src="Picture1.png" alt="Hardie Laksa Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="transactions.html">Transaction Details</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+        <a href="profile.html">
+            <img class="profile" src="50ff4b3abf0cc569fef91d2f75b459c4.png" alt="User Profile">
+        </a>
+    </header>
+
+    <div class="transaction-title">Details Transaction</div>
+
+    <div class="transaction-section">
+        <div class="left-panel">
+            <div class="product-item">
+                <img src="placeholder.jpg" alt="Laksa Product">
+                <div class="product-item-details">
+                    <p><strong>NAME Product</strong></p>
+                    <p>DESCRIPTION</p>
+                    <p>x1</p>
+                </div>
+            </div>
+            <div class="product-item">
+                <img src="placeholder.jpg" alt="Laksa Product">
+                <div class="product-item-details">
+                    <p><strong>NAME Product</strong></p>
+                    <p>DESCRIPTION</p>
+                    <p>x1</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="product-summary">
+                <p>PRODUCT 1 &nbsp;&nbsp;&nbsp;&nbsp; RM300</p>
+                <p>PRODUCT 2 &nbsp;&nbsp;&nbsp;&nbsp; RM300</p>
+                <p>PRODUCT 3 &nbsp;&nbsp;&nbsp;&nbsp; RM300</p>
+                <p>PRODUCT 4 &nbsp;&nbsp;&nbsp;&nbsp; RM300</p>
+            </div>
+            <div class="total-price">
+                Total: RM1200
+            </div>
+            <button class="print-receipt" onclick="printReceipt()">Print Receipt</button>
+        </div>
+    </div>
+
+    <script>
+        function printReceipt() {
+            alert('Receipt printed successfully!');
+            window.print();
+        }
+    </script>
+</body>
+</html>

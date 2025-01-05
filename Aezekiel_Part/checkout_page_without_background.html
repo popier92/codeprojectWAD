@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            position: relative;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            background-color: #ffe6e6;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
+            margin: 20px auto;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 16px;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background-color: #f4b0b0;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ff9999;
+        }
+
+        .profile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .checkout-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .checkout-section {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .left-panel {
+            width: 60%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-section {
+            margin-bottom: 20px;
+        }
+
+        .location-section input {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .location-section button {
+            padding: 10px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .location-section button:hover {
+            background-color: #ffaa00;
+        }
+
+        .laksa-summary {
+            margin-bottom: 20px;
+        }
+
+        .laksa-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .laksa-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            background-color: #ccc;
+        }
+
+        .laksa-item-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .right-panel {
+            width: 35%;
+            background: linear-gradient(rgba(0, 0, 0, 0.07), rgba(0, 0, 0, 0.07));
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 148, 168, 0.5);
+            position: relative;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .payment-options button {
+            display: block;
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ff9999;
+            background-color: white;
+            color: #ff9999;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .payment-options button:hover {
+            background-color: #ff9999;
+            color: white;
+        }
+
+        .cancel-button {
+            width: 50%;
+            padding: 8px;
+            margin: 20px auto 0;
+            background-color: #f4b0b0;
+            color: white;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .cancel-button:hover {
+            background-color: #ff9999;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-panel, .right-panel {
+                width: 90%;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+    <title>Checkout Page Without Background</title>
+</head>
+<body>
+    <header class="top-section">
+        <a href="home.html">
+            <img class="logo" src="Picture1.png" alt="Hardie Laksa Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="team.html">Our Team</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="transactions.html">Transaction Details</a></li>
+                <li><a href="help.html">Help</a></li>
+            </ul>
+        </nav>
+        <a href="profile.html">
+            <img class="profile" src="50ff4b3abf0cc569fef91d2f75b459c4.png" alt="User Profile">
+        </a>
+    </header>
+
+    <div class="checkout-title">Checkout</div>
+
+    <div class="checkout-section">
+        <div class="left-panel">
+            <div class="location-section">
+                <label for="location">Location:</label>
+                <input type="text" id="location" placeholder="Enter your location">
+                <button onclick="saveLocation()">Save</button>
+            </div>
+
+            <div class="laksa-summary" id="laksa-summary">
+                <!-- Dynamically add items -->
+            </div>
+
+            <div class="total-price" id="total-price">
+                Total: RM 0.00
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h3 style="text-align:center;">Payment Options</h3>
+            <div class="payment-options">
+                <button onclick="selectPayment('Online Banking')">Online Banking</button>
+                <button onclick="selectPayment('Credit/Debit')">Credit/Debit</button>
+                <button onclick="selectPayment('Cash')">Cash</button>
+            </div>
+            <button class="cancel-button" onclick="goBackToCart()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Example items
+        const laksaItems = [
+            { name: "Laksa Biasa", description: "Delicious laksa", quantity: 1, price: 5.59, image: "placeholder.jpg" },
+            { name: "Laksa Pattaya", description: "Spicy and creamy", quantity: 2, price: 6.50, image: "placeholder.jpg" }
+        ];
+
+        // Render Laksa Summary
+        function renderLaksaSummary() {
+            const laksaSummary = document.getElementById("laksa-summary");
+            const totalPrice = document.getElementById("total-price");
+            let total = 0;
+
+            laksaSummary.innerHTML = ""; // Clear existing items
+
+            laksaItems.forEach((item) => {
+                const laksaItem = document.createElement("div");
+                laksaItem.className = "laksa-item";
+                laksaItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="laksa-item-details">
+                        <p><strong>${item.name}</strong></p>
+                        <p>${item.description}</p>
+                        <p>x ${item.quantity}</p>
+                    </div>
+                `;
+                laksaSummary.appendChild(laksaItem);
+                total += item.price * item.quantity;
+            });
+
+            totalPrice.textContent = `Total: RM ${total.toFixed(2)}`;
+        }
+
+        // Handle Payment Selection
+        function selectPayment(method) {
+            alert(`You have selected ${method} as your payment method.`);
+            // Simulate email generation
+            alert(`An email confirmation has been sent to your registered email.`);
+        }
+
+        // Save Location
+        function saveLocation() {
+            const locationInput = document.getElementById("location").value;
+            if (locationInput.trim()) {
+                alert("Location saved successfully!");
+            } else {
+                alert("Please enter a valid location.");
+            }
+        }
+
+        // Go back to Cart Page
+        function goBackToCart() {
+            window.location.href = "cart.html";
+        }
+
+        // Initial Render
+        renderLaksaSummary();
+    </script>
+</body>
+</html>
