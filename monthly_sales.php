@@ -11,6 +11,13 @@
 </head>
 
 <body>
+
+    <?php
+
+    include 'asset/connect.php';
+    $stmt = $pdo->prepare("SELECT id, Password, role FROM user_login WHERE Email = :email");
+    ?>
+
     <!-- Header Section -->
     <div class="top-section">
         <div class="header">
@@ -35,7 +42,7 @@
             <h2>Admin Dashboard</h2>
             <ul>
                 <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Manage Products</a></li>
+                <li><a href="productedit.php">Manage Products</a></li>
                 <li><a href="#" class="active">Monthly Sales</a></li>
                 <li><a href="#">Transaction Reports</a></li>
             </ul>
@@ -50,8 +57,8 @@
                     <canvas id="chart" width="900" height="400" style="width: 900x;;max-width:900px"></canvas>
 
                     <script>
-                        var xValues = ["january", "febuary", "march", "april", "may","june","july","august","september","october","november","december"];
-                        var yValues = [55, 49, 44, 24, 15,22,33,55,77,55,33,22];
+                        var xValues = ["january", "febuary", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+                        var yValues = [55, 49, 44, 24, 15, 22, 33, 55, 77, 55, 33, 22];
                         var barColors = ["red", "green", "blue", "orange", "brown"];
 
                         new Chart("chart", {
