@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="banking.css">
+    <title>Online Banking</title>
+</head>
+<body>
+    <div class="payment-container">
+        <!-- Left Section: Payment Summary -->
+        <div class="payment-summary">
+            <div class="summary-header">
+                <h2>You're paying,</h2>
+                <p class="summary-total">RM10.00</p>
+            </div>
+
+            <div class="summary-details">
+                <p><strong>Laksa Biasa</strong></p>
+                <p>Remarks: No Remarks</p>
+                <hr>
+                <p>Discounts & Offers: RM 0.00</p>
+                <p>Tax: RM 0.00</p>
+                <hr>
+                <p>Total: RM10.00</p>
+            </div>
+        </div>
+
+        <!-- Right Section: Online Banking Form -->
+        <div class="payment-form">
+            <h1>Online Banking</h1>
+            <h2>Banks</h2>
+            <form>
+                <div class="form-group">
+                    <label for="bank-name">Bank Name</label>
+                    <input type="text" id="bank-name" placeholder="Enter bank name">
+                </div>
+
+                <div class="form-group">
+                    <label for="account-number">Bank Account Number</label>
+                    <input type="text" id="account-number" placeholder="Enter account number">
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group discount">
+                    <input type="text" placeholder="Discount Code">
+                    <button type="button">Apply</button>
+                </div>
+
+                <button type="submit" class="pay-btn">Pay</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
