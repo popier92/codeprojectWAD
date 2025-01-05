@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Return location header for redirection
             if ($user['role'] === 'admin') {
-                header("Location: addashboard.html") ;
+                header("Location: http://localhost:5000/codeprojectWAD/public/addashboard.php") ;
             } else {
-                header( "Location: cusdashboard.html");
+                header( "Location: http://localhost:5000/codeprojectWAD/public/cusdashboard.php");
             }
             exit();
         } else {
