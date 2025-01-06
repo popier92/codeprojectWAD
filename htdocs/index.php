@@ -14,14 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             // Fetch user from database
-            $stmt = $pdo->prepare("SELECT user_id, password_hash, role FROM users WHERE email = :email");
+            $stmt = $pdo->prepare("SELECT id, Password, role FROM user_login WHERE Email = :email");
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
             if ($user) {
-                if (password_verify($password, $user['password_hash'])) {
+                if (password_verify($password, $user['Password'])) {
                     // Start session and set variables
-                    $_SESSION['user_id'] = $user['user_id'];
+                    $_SESSION['user_id'] = $user['id'];
                     $_SESSION['role'] = $user['role'];
                     session_regenerate_id(true);
 
@@ -50,12 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/Login.css">
 </head>
+
 <body>
     <div class="left-section">
         <!-- Login Form -->
@@ -67,7 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="jsErrorContainer" style="color: red;"></div>
 
             <!-- PHP Error Message -->
-            <?php if (!empty($error_message)) { echo '<div style="color: red;">' . $error_message . '</div>'; } ?>
+            <?php if (!empty($error_message)) {
+                echo '<div style="color: red;">' . $error_message . '</div>';
+            } ?>
 
             <!-- Email Input -->
             <label for="Email">Email</label>
@@ -139,4 +144,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </body>
+
 </html>
