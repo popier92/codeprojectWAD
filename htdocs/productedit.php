@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <!-- Navigation Section -->
+    <!-- Navigation Sectionn -->
     <div class="header">
         <img class="logo" src="icon/logo.jpeg" alt="Logo">
         <nav>
