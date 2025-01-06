@@ -5,10 +5,10 @@ jobs:
     name: Deploy 🚀
     runs-on: ubuntu-latest
     steps: 
-      - name: Checkout repository
+      - name: Checkout repository 👓
         uses: actions/checkout@v3
           
-      - name: Sync files to hosting
+      - name: Sync files to hosting 💿
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with: 
           server: ftpupload.net
