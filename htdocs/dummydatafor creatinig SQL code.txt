@@ -1,0 +1,114 @@
+dummy data
+
+2.admin@example.com
+  Admin@12
+
+3.user@example.com
+  User@123
+
+create DATABASE db_system;
+
+use db_system;
+
+----------------------------table product
+CREATE TABLE products (
+    product_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each product
+    name VARCHAR(255) NOT NULL,                -- Product name
+    price DECIMAL(10, 2) NOT NULL,             -- Product price
+    image VARCHAR(255) DEFAULT NULL,           -- Path or URL of the product image
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp for when the product was added
+);
+
+-------------------------------table user
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each user
+    username VARCHAR(100) NOT NULL UNIQUE,  -- Username
+    email VARCHAR(255) NOT NULL UNIQUE,     -- Email address
+    password_hash VARCHAR(255) NOT NULL,    -- Password hash
+    role ENUM('admin', 'customer') DEFAULT 'customer', -- User role
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Account creation timestamp
+);
+
+
+------------------------categories table
+CREATE TABLE categories (
+    category_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each category
+    name VARCHAR(255) NOT NULL UNIQUE,          -- Category name
+    description TEXT DEFAULT NULL,              -- Optional description of the category
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp for category creation
+);
+
+
+------------------------------------- product categories
+
+CREATE TABLE product_categories (
+    product_id INT NOT NULL,                    -- Foreign key referencing products table
+    category_id INT NOT NULL,                   -- Foreign key referencing categories table
+    PRIMARY KEY (product_id, category_id),      -- Composite primary key
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
+);
+
+---------------------------------------- order 
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each order
+    user_id INT NOT NULL,                    -- Foreign key referencing users table
+    total_amount DECIMAL(10, 2) NOT NULL,    -- Total amount for the order
+    status ENUM('pending', 'completed', 'canceled') DEFAULT 'pending', -- Order status
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Order creation timestamp
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-------------------------------- order item
+CREATE TABLE order_items (
+    item_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each item
+    order_id INT NOT NULL,                  -- Foreign key referencing orders table
+    product_id INT NOT NULL,                -- Foreign key referencing products table
+    quantity INT NOT NULL,                  -- Quantity of the product
+    price DECIMAL(10, 2) NOT NULL,          -- Price of the product at the time of order
+    CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    CONSTRAINT fk_product_order FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
+
+
+
+------------------------------ transaction table
+CREATE TABLE transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each transaction
+    order_id INT NOT NULL,                         -- Foreign key referencing orders table
+    payment_method ENUM('credit_card', 'paypal', 'bank_transfer') NOT NULL, -- Payment method
+    payment_status ENUM('paid', 'failed', 'pending') DEFAULT 'pending', -- Payment status
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Transaction creation timestamp
+    CONSTRAINT fk_transaction_order FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
+);
+
+-------------------------------- cart
+CREATE TABLE cart (
+    cart_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each cart item
+    user_id INT NOT NULL,                   -- Foreign key referencing users table
+    product_id INT NOT NULL,                -- Foreign key referencing products table
+    quantity INT NOT NULL,                  -- Quantity of the product
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Cart creation timestamp
+    CONSTRAINT fk_cart_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_cart_product FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
+
+
+
+--------------------------- optional (review)
+CREATE TABLE reviews (
+    review_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each review
+    user_id INT NOT NULL,                     -- Foreign key referencing users table
+    product_id INT NOT NULL,                  -- Foreign key referencing products table
+    rating INT CHECK (rating BETWEEN 1 AND 5),-- Rating between 1 and 5
+    comment TEXT DEFAULT NULL,                -- Optional review comment
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Review creation timestamp
+    CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_review_product FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
+
+
+
+
+
+
