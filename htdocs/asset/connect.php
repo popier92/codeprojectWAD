@@ -1,5 +1,5 @@
 <?php
-$servername = "localhost";
+$servername = "sql209.infinityfree.com";
 $username = "if0_38042508";
 $password = "OPhQ0F3THq6o2C";
 $dbname = "db_userdetails";
