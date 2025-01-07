@@ -1,0 +1,133 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #fff;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffe6e6;
+    box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
+    border-radius: 120px;
+    margin: 20px auto;
+    width: 90%;
+}
+
+.logo {
+    width: 80px;
+    clip-path: circle(50%);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #f4b0b0;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #ff9999;
+}
+
+.profile {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* Cancel Button Section */
+.cancel-button-container {
+    position: absolute;
+    top: 130px; /* Position below the navigation */
+    left: 20px; /* Adjust the left position */
+}
+
+.cancel-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f4b0b0;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+    background-color: #ff9999;
+    transform: scale(1.1); /* Slight enlarge effect on hover */
+}
+
+
+
+/* Main Content Section */
+.main-content {
+    padding: 30px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main-content h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.product-card {
+    background-color: #ffe6e6;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
+    display: inline-block;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
+
+.product-card .image-placeholder img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Buttons */
+.submit_btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #f4b0b0;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.submit_btn:hover {
+    background-color: #ff9999;
+}
