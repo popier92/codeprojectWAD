@@ -2,7 +2,7 @@
 $servername = "sql209.infinityfree.com";
 $username = "if0_38042508";
 $password = "OPhQ0F3THq6o2C";
-$dbname = "db_userdetails";
+$dbname = "if0_38042508_db_userdetails";
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
