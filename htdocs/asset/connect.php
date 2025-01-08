@@ -7,7 +7,7 @@ $dbname = getenv('DB_NAME') ?: 'if0_38042508_db_system';
 
 try {
     // Create a new PDO instance
-    $pdo = new PDO("mysql:host=localhost;dbname=db_system;charset=utf8mb4", $username, $password);
+    $pdo = new PDO("mysql:host=sql209.infinityfree.com;dbname=if0_38042508_db_system;charset=utf8mb4", $username, $password);
 
     // Set PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
