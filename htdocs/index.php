@@ -2,77 +2,62 @@
 session_start();
 include 'asset/connect.php'; // Ensure this file sets up $pdo
 
-$error_message = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get and sanitize input
+    // Handle login logic
     $email = filter_var(trim($_POST['Email']), FILTER_SANITIZE_EMAIL);
     $password = trim($_POST['Password']);
 
+    header('Content-Type: application/json');
+
     if (empty($email) || empty($password)) {
-        $error_message = 'Email and password are required.';
-    } else {
-        try {
-            // Fetch user from database
-            $stmt = $pdo->prepare("SELECT id, Password, role FROM user_login WHERE Email = :email");
-            $stmt->execute(['email' => $email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        echo json_encode(['success' => false, 'message' => 'Email and password are required.']);
+        exit();
+    }
 
+    try {
+        // Fetch user from database
+        $stmt = $pdo->prepare("SELECT user_id, password_hash, role FROM users WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                if (password_verify($password, $user['Password'])) {
-                    // Start session and set variables
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['role'] = $user['role'];
-                    session_regenerate_id(true);
+        if ($user) {
+            if (password_verify($password, $user['password_hash'])) {
+                $_SESSION['user_id'] = $user['user_id'];
+                $_SESSION['role'] = $user['role'];
+                session_regenerate_id(true);
 
-                    // Redirect based on role
-                    if ($user['role'] === 'admin') {
-                        header('Location: addashboard.php');
-                    } elseif ($user['role'] === 'customer') {
-                        header('Location: cusdashboard.php');
-                    } else {
-                        $error_message = 'Unexpected role. Please contact support.';
-                    }
-                    exit();
-                } else {
-                    $error_message = 'Invalid email or password.';
-                }
+                echo json_encode(['success' => true, 'redirect' => $user['role'] === 'admin' ? 'addashboard.php' : 'cusdashboard.php']);
+                exit();
             } else {
-                $error_message = 'Invalid email or password.';
+                echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
+                exit();
             }
-        } catch (PDOException $e) {
-            error_log("Database error: " . $e->getMessage());
-            $error_message = 'An error occurred. Please try again later.';
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
+            exit();
         }
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'An error occurred. Please try again later.']);
+        exit();
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="css/Login.css">
 </head>
-
 <body>
     <div class="left-section">
         <!-- Login Form -->
         <form class="form-position" id="loginForm" method="post">
             <h1>Login</h1>
             <img id="user" src="icon/user.png" alt="IconLogin">
-
-            <!-- Error message container for JavaScript -->
-            <div id="jsErrorContainer" style="color: red;"></div>
-
-            <!-- PHP Error Message -->
-            <?php if (!empty($error_message)) {
-                echo '<div style="color: red;">' . $error_message . '</div>';
-            } ?>
 
             <!-- Email Input -->
             <label for="Email">Email</label>
@@ -84,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Forgot Password Link -->
             <div class="forgot-password">
-                <a href="Forgotpass.html">Forgot Password?</a>
+                <a href="#" id="forgotPasswordLink">Forgot Password?</a>
             </div>
 
             <!-- Buttons -->
@@ -100,41 +85,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
+        // Handle form submission for login
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Prevent form submission
+
             const emailField = document.getElementById('Email');
             const passwordField = document.getElementById('Password');
-            const errorContainer = document.getElementById('jsErrorContainer');
 
             const email = emailField.value.trim();
             const password = passwordField.value.trim();
 
-            // Clear previous error messages
-            errorContainer.textContent = '';
-
-            let isValid = true;
-
-            // Email validation
+            // Client-side validation
             if (!email) {
-                errorContainer.textContent = 'Email is required.';
+                alert('Email is required.');
                 emailField.focus();
-                isValid = false;
-            } else if (!validateEmail(email)) {
-                errorContainer.textContent = 'Invalid email format.';
-                emailField.focus();
-                isValid = false;
+                return;
             }
-
-            // Password validation
+            if (!validateEmail(email)) {
+                alert('Invalid email format.');
+                emailField.focus();
+                return;
+            }
             if (!password) {
-                errorContainer.textContent = 'Password is required.';
+                alert('Password is required.');
                 passwordField.focus();
-                isValid = false;
+                return;
             }
 
-            // Prevent form submission if validation fails
-            if (!isValid) {
-                e.preventDefault();
+            // Send data to the server
+            try {
+                const response = await fetch('', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ Email: email, Password: password })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Redirect if login is successful
+                    window.location.href = result.redirect;
+                } else {
+                    // Display error message
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again later.');
             }
+        });
+
+        // Handle Forgot Password click
+        document.getElementById('forgotPasswordLink').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent the default link behavior
+
+            // Replace this block with actual forgot password logic
+            alert('Please check your email to reset your password.');
         });
 
         // Function to validate email format
@@ -144,5 +150,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </body>
-
 </html>

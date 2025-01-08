@@ -1,3 +1,15 @@
+<?php
+include 'asset/connect.php';
+
+// Fetch product details based on the provided product_id
+$product = null;
+if (isset($_GET['product_id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+    $stmt->execute([$_GET['product_id']]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,89 +17,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/productedit.css">
-    <title>Add Products</title>
+    <title>Edit Product</title>
 </head>
 
 <body>
-    <script>
-        function editOn() {
-            document.getElementById("overlay").style.display = "block";
-        }
-
-        function off() {
-            document.getElementById("overlay").style.display = "none";
-        }
-    </script>
-    <?php
-
-    include 'asset/connect.php';
-    
-    ?>
-
-    <div id="overlay">
-        <div class="edit-overlaybox">
-
-
-            <form class="edit_form" action>
-
-                <label for="name">product name:</label><br>
-                <input type="text" id="name" name="name"><br>
-
-                <p>Click on the "Choose File" button to upload a image</p>
-                <input type="file" id="myFile" name="filename">
-                <div>
-                    <label for="cost">product cost(RM):</label><br>
-                    <input type="number" step="0.01" id="name" name="name"><br>
-                </div>
-
-                <input class="submit_btn" type="submit">
-                <div class="cancel_button" onclick="off()">Cancel</div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Navigation Sectionn -->
+    <!-- Navigation Section -->
     <div class="header">
         <img class="logo" src="icon/logo.jpeg" alt="Logo">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Our Team</a></li>
-                <li><a href="#">Cart</a></li>
-                <li><a href="#">Transaction Details</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
-        </nav>
+        <div class="dashboard-welcome">
+               <h1>Welcome To Product Edit Page</h1>
+           </div>
         <a href="profile.html">
             <img class="profile" src="icon/profilerb.png" alt="Profile">
         </a>
     </div>
 
+    <!-- Cancel Button -->
+    <div class="cancel-button-container">
+        <a href="amp/amp.php" class="cancel-button">Cancel</a>
+    </div>
+
     <!-- Main Content Section -->
     <div class="main-content">
-        <h1>Add Products</h1>
+        <h1>Edit Product</h1>
 
+        <?php if ($product): ?>
+        <!-- Product Card -->
         <div class="product-card">
-            <div class="image-placeholder"></div>
-            <h2>Laksa Biasa</h2>
-            <p>RM 5.59</p>
+            <div class="image-placeholder">
+                <img src="<?php echo htmlspecialchars($product['image'] ?: 'icon/placeholder.png'); ?>" alt="Product Image">
+            </div>
+            <h2><?php echo htmlspecialchars($product['name']); ?></h2>
+            <p>RM <?php echo number_format($product['price'], 2); ?></p>
         </div>
 
-        <a href="#" class="confirm-btn">CONFIRM</a>
+        <!-- Form Section -->
+        <form class="edit_form" action="amp/save_product.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
 
-        <!-- Back Icon -->
-        <button class="back-icon" style="background: url(icon/pencil.png)" onclick="window.location='addashboard.php'">
-            <img src="icon/back.png" alt="Back">
-        </button>
+            <!-- Product Name Field -->
+            <div>
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter product name" 
+                       value="<?php echo htmlspecialchars($product['name']); ?>" required>
+            </div>
 
-        <!-- Edit Icon 
-        <div >
-            
-        </div>-->
-        <button class="edit-icon" style="background: url(icon/pencil.png)" onclick="editOn()">
-            <img src="icon/pencil.png" alt="Edit">
-        </button>
+            <!-- Product Price Field -->
+            <div>
+                <label for="price">Product Price (RM):</label>
+                <input type="number" step="0.01" id="price" name="price" placeholder="Enter product price" 
+                       value="<?php echo htmlspecialchars($product['price']); ?>" required>
+            </div>
+
+            <!-- Product Image Field -->
+            <div>
+                <label for="image">Product Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-container">
+                <button type="submit" class="submit_btn">Save Product</button>
+            </div>
+        </form>
+        <?php else: ?>
+        <p>Product not found or invalid product ID.</p>
+        <?php endif; ?>
     </div>
 </body>
 

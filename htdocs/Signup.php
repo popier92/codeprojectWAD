@@ -23,7 +23,7 @@
             <input type="password" id="confirmPassword" name="ConfirmPassword" required>
 
             <div class="button-container">
-                <a href="MainLogin.php" class="button">Cancel</a>
+                <a href="index.php" class="button">Login</a>
                 <button class="button2" type="submit" name="Confirm">Confirm</button>
             </div>
         </form>
@@ -86,7 +86,7 @@
             $sql = "INSERT INTO users (email, password_hash) VALUES ('$email', '$hashedPassword')";
 
             if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Sign up successful!'); window.location.href = 'MainLogin.php';</script>";
+                echo "<script>alert('Sign up successful!'); window.location.href = 'index.php';</script>";
             } else {
                 if ($conn->errno === 1062) {
                     // Handle duplicate entry error
