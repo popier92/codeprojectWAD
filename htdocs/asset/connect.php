@@ -3,7 +3,7 @@
 $servername = getenv('DB_HOST') ?: 'sql209.infinityfree.com';
 $username = getenv('DB_USER') ?: 'if0_38042508';
 $password = getenv('DB_PASS') ?: 'OPhQ0F3THq6o2C';
-$dbname = getenv('DB_NAME') ?: 'db_system';
+$dbname = getenv('DB_NAME') ?: 'if0_38042508_db_system';
 
 try {
     // Create a new PDO instance
