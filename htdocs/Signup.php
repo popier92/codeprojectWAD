@@ -57,9 +57,9 @@
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Database connection details
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
+        $servername = "sql209.infinityfree.com";
+        $username = "if0_38042508";
+        $password = "OPhQ0F3THq6o2C";
         $dbname = "db_system";
 
         // Create connection
