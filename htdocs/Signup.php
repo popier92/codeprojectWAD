@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="left-section">
-        <form class="form-position" id="signup" method="POST">
+        <form class="form-position" id="signup" method="post">
             <h1>Sign Up</h1>
             <img id="user" src="icon/user.png" alt="IconSignup">
 
