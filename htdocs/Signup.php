@@ -60,7 +60,7 @@
     </script>
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Database connection details
         $servername = "sql209.infinityfree.com";
         $username = "if0_38042508";
