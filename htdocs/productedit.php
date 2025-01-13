@@ -21,6 +21,40 @@ if ($product) {
     $selectedCategories = $categoriesForProductStmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['product_id'])) {
+    $productId = $_POST['product_id'];
+    $productName = trim($_POST['name']);
+    $productPrice = trim($_POST['price']);
+    $selectedCategories = $_POST['categories'] ?? []; // Get selected categories
+
+    // Update product details
+    $updateProductStmt = $pdo->prepare("UPDATE products SET name = ?, price = ? WHERE product_id = ?");
+    $updateProductStmt->execute([$productName, $productPrice, $productId]);
+
+    // Update product categories
+    try {
+        // Remove existing categories for the product
+        $deleteCategoriesStmt = $pdo->prepare("DELETE FROM product_categories WHERE product_id = ?");
+        $deleteCategoriesStmt->execute([$productId]);
+
+        // Insert the newly selected categories
+        if (!empty($selectedCategories)) {
+            $insertCategoryStmt = $pdo->prepare("INSERT INTO product_categories (product_id, category_id) VALUES (?, ?)");
+            foreach ($selectedCategories as $categoryId) {
+                $insertCategoryStmt->execute([$productId, $categoryId]);
+            }
+        }
+
+        echo "<script>alert('Product and categories updated successfully.');</script>";
+    } catch (PDOException $e) {
+        echo "<script>alert('An error occurred while updating categories. Please try again.');</script>";
+    }
+}
+
+
+
+
 // Handle adding a new category
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['new_category'])) {
     $newCategory = trim($_POST['new_category']);
@@ -72,10 +106,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['new_category'])) {
         <!-- Product Card -->
         <div class="product-card">
         <div class="image-placeholder">
-    <img src="<?php echo (!empty($product['image']) && file_exists('../uploads/' . $product['image'])) 
+      <img src="<?php echo (!empty($product['image']) && file_exists('../uploads/' . $product['image'])) 
         ? '../uploads/' . htmlspecialchars($product['image']) 
         : 'icon/placeholder.png'; ?>" alt="Product Image">
-</div>
+        </div>
             <h2><?php echo htmlspecialchars($product['name']); ?></h2>
             <p>RM <?php echo number_format($product['price'], 2); ?></p>
         </div>
@@ -105,18 +139,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['new_category'])) {
             </div>
 
             <!-- Categories Selection -->
-            <div>
-                <label for="categories">Categories:</label>
-                <select id="categories" name="categories[]" multiple>
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo htmlspecialchars($category['category_id']); ?>" 
-                            <?php echo in_array($category['category_id'], $selectedCategories) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($category['name']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <small>Hold Ctrl (Cmd on Mac) to select multiple categories.</small>
-            </div>
+      
+<div>
+    <label for="categories">Categories:</label>
+    <select id="categories" name="categories[]" multiple>
+        <?php foreach ($categories as $category): ?>
+            <option value="<?php echo htmlspecialchars($category['category_id']); ?>" 
+                <?php echo in_array($category['category_id'], $selectedCategories) ? 'selected' : ''; ?>>
+                <?php echo htmlspecialchars($category['name']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <small>Hold Ctrl (Cmd on Mac) to select multiple categories.</small>
+</div>
+
 
             <!-- Add New Category -->
             <div>
