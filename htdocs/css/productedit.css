@@ -16,15 +16,20 @@ body {
 }
 
 /* Main Container */
-.container {
-    
-    width: 100px;
+.main-content {
+    width: 100%; /* Adjust for responsiveness */
+    max-width: 800px; /* Limit the maximum width */
     background-color: #ffe6e6;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
     padding: 20px;
+    text-align: left; /* Align content to the left for readability */
+    margin-top: 150px;
+}
+
+.main-content h1{
     text-align: center;
-    margin-top:100px;  /* Add margin to push content below the header */
+    margin-bottom: 10px;
 }
 
 /* Header Section */
@@ -42,7 +47,6 @@ body {
     position: absolute; /* Fix the header at the top */
     z-index: 1000; /* Ensure it stays above other content */
     top: 10px;
-
 }
 
 .logo-container {
@@ -67,7 +71,6 @@ body {
     color: #444;
 }
 
-
 .profile {
     width: 80px;
     height: 80px;
@@ -77,8 +80,37 @@ body {
     object-fit: cover;
     transition: 0.3s ease;
     cursor: pointer;
-
 }
+
+/* Form Styling */
+.edit_form {
+    width: 100%; /* Form takes full width of the container */
+}
+
+.edit_form div {
+    margin-bottom: 20px; /* Add spacing between form fields */
+}
+
+.edit_form input[type="text"],
+.edit_form input[type="number"],
+.edit_form input[type="file"],
+.edit_form select {
+    width: 100%; /* Input fields span the full width */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.edit_form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
 /* Product Card */
 .product-card {
     background-color: #fff;
@@ -96,38 +128,17 @@ body {
     margin-bottom: 10px;
 }
 
-/* Form Input Fields */
-.edit_form input[type="text"],
-.edit_form input[type="number"],
-.edit_form input[type="file"],
-.edit_form select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-/* Labels */
-.edit_form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-    color: #333;
-}
-
 /* Button Container */
 .button-container {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-top: 20px;
-    margin-bottom: 50px;
 }
 
 .button-container .submit_btn,
 .button-container .cancel_btn {
-    width: 48%; /* Buttons take equal width */
+    flex: 1; /* Buttons take equal space */
     padding: 10px;
     border-radius: 5px;
     font-size: 16px;
@@ -162,16 +173,18 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        max-width: 90%;
+        width: 95%; /* Utilize more space on smaller screens */
+        padding: 15px;
+    }
+
+    .edit_form input[type="text"],
+    .edit_form input[type="number"],
+    .edit_form input[type="file"],
+    .edit_form select {
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 
     .button-container {
         flex-direction: column;
-        gap: 10px;
-    }
-
-    .button-container .submit_btn,
-    .button-container .cancel_btn {
-        width: 100%; /* Buttons span full width on small screens */
     }
 }
