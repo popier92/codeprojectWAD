@@ -52,6 +52,7 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Title -->
                 <div class="grid-header">
                     <h1>Manage Products</h1>
+                     <input type="text" id="search-bar" placeholder="Search products by name..." onkeyup="filterProducts()">
                 </div>
 
                 <!-- Product Grid -->
@@ -212,6 +213,21 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_ASSOC);
                 console.error("Error deleting product:", error);
             });
         }
+
+        
+                // Search Filter for Products
+                function filterProducts() {
+            const searchValue = document.getElementById('search-bar').value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('h2').textContent.toLowerCase();
+                if (productName.includes(searchValue)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
     </script>
 </body>
 </html>
