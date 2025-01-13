@@ -8,6 +8,18 @@ if (isset($_GET['product_id'])) {
     $stmt->execute([$_GET['product_id']]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+// Fetch categories
+$categoriesStmt = $pdo->query("SELECT * FROM categories ORDER BY name ASC");
+$categories = $categoriesStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch selected categories for the product
+$selectedCategories = [];
+if ($product) {
+    $categoriesForProductStmt = $pdo->prepare("SELECT category_id FROM product_categories WHERE product_id = ?");
+    $categoriesForProductStmt->execute([$product['product_id']]);
+    $selectedCategories = $categoriesForProductStmt->fetchAll(PDO::FETCH_COLUMN);
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +44,7 @@ if (isset($_GET['product_id'])) {
         </a>
     </div>
 
-    <!-- Cancel Button -->
-    <div class="cancel-button-container">
-        <a href="amp/amp.php" class="cancel-button">Cancel</a>
-    </div>
+
 
     <!-- Main Content Section -->
     <div class="main-content">
@@ -44,9 +53,11 @@ if (isset($_GET['product_id'])) {
         <?php if ($product): ?>
         <!-- Product Card -->
         <div class="product-card">
-            <div class="image-placeholder">
-                <img src="<?php echo htmlspecialchars($product['image'] ?: 'icon/placeholder.png'); ?>" alt="Product Image">
-            </div>
+        <div class="image-placeholder">
+    <img src="<?php echo (!empty($product['image']) && file_exists('../uploads/' . $product['image'])) 
+        ? '../uploads/' . htmlspecialchars($product['image']) 
+        : 'icon/placeholder.png'; ?>" alt="Product Image">
+</div>
             <h2><?php echo htmlspecialchars($product['name']); ?></h2>
             <p>RM <?php echo number_format($product['price'], 2); ?></p>
         </div>
@@ -75,9 +86,24 @@ if (isset($_GET['product_id'])) {
                 <input type="file" id="image" name="image" accept="image/*">
             </div>
 
+            <!-- Categories Selection -->
+            <div>
+                <label for="categories">Categories:</label>
+                <select id="categories" name="categories[]" multiple>
+                    <?php foreach ($categories as $category): ?>
+                        <option value="<?php echo htmlspecialchars($category['category_id']); ?>" 
+                            <?php echo in_array($category['category_id'], $selectedCategories) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($category['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <small>Hold Ctrl (Cmd on Mac) to select multiple categories.</small>
+            </div>
+
             <!-- Action Buttons -->
             <div class="button-container">
                 <button type="submit" class="submit_btn">Save Product</button>
+                <a href="amp/amp.php" class="cancel_btn">Cancel</a>
             </div>
         </form>
         <?php else: ?>
