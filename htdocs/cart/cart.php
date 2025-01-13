@@ -47,14 +47,12 @@ try {
                     <li><a href="../transaction.php">Transaction Details</a></li>
                     <li><a href="../QnA.php">Help</a></li>
             </ul>
-        </nav>
-      
-            </div>
+                        </div>
             <a href="../adprofileedit.php">
                 <img class="profile" src="../icon/profilerb.png" alt="Profile">
             </a>
         </div>
-       
+        </nav>   
     </div>
 
     <div class="cart-container">
