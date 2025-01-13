@@ -47,12 +47,12 @@ try {
                     <li><a href="../transaction.php">Transaction Details</a></li>
                     <li><a href="../QnA.php">Help</a></li>
             </ul>
-                        </div>
-            <a href="../adprofileedit.php">
+        </nav>
+      
+        <a href="../adprofileedit.php">
                 <img class="profile" src="../icon/profilerb.png" alt="Profile">
             </a>
-        </div>
-        </nav>   
+       
     </div>
 
     <div class="cart-container">
@@ -76,7 +76,11 @@ try {
                                 value="<?php echo $item['product_id']; ?>"
                                 onchange="calculateSelectedTotal()"
                             >
-                            <img src="<?php echo htmlspecialchars($item['image']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>">
+                            <img src="<?php echo (!empty($item['image']) && file_exists('../uploads/' . $item['image'])) 
+    ? '../uploads/' . htmlspecialchars($item['image']) 
+    : '../icon/default-placeholder.png'; ?>" 
+    alt="<?php echo htmlspecialchars($item['name']); ?>">
+
                             <div class="cart-item-description">
                                 <p><strong><?php echo htmlspecialchars($item['name']); ?></strong></p>
                                 <p class="cart-item-price">RM <?php echo number_format($item['price'], 2); ?></p>
