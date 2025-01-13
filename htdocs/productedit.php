@@ -20,6 +20,24 @@ if ($product) {
     $categoriesForProductStmt->execute([$product['product_id']]);
     $selectedCategories = $categoriesForProductStmt->fetchAll(PDO::FETCH_COLUMN);
 }
+
+// Handle adding a new category
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['new_category'])) {
+    $newCategory = trim($_POST['new_category']);
+    if (!empty($newCategory)) {
+        $insertCategoryStmt = $pdo->prepare("INSERT INTO categories (name) VALUES (?)");
+        try {
+            $insertCategoryStmt->execute([$newCategory]);
+        } catch (PDOException $e) {
+            // Handle duplicate entry or other errors
+            if ($e->getCode() == 23000) { // Duplicate entry error code
+                echo "<script>alert('Category already exists.');</script>";
+            } else {
+                echo "<script>alert('An error occurred while adding the category. Please try again.');</script>";
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +81,7 @@ if ($product) {
         </div>
 
         <!-- Form Section -->
-        <form class="edit_form" action="amp/save_product.php" method="POST" enctype="multipart/form-data">
+        <form class="edit_form" action="" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
 
             <!-- Product Name Field -->
@@ -98,6 +116,12 @@ if ($product) {
                     <?php endforeach; ?>
                 </select>
                 <small>Hold Ctrl (Cmd on Mac) to select multiple categories.</small>
+            </div>
+
+            <!-- Add New Category -->
+            <div>
+                <label for="new-category">Add New Category:</label>
+                <input type="text" id="new-category" name="new_category" placeholder="Enter new category name">
             </div>
 
             <!-- Action Buttons -->
