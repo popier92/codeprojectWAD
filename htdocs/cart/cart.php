@@ -49,7 +49,11 @@ try {
             </ul>
         </nav>
       
-            <img class="profile" src="../icon/profilerb.png" alt="Profile">
+            </div>
+            <a href="../adprofileedit.php">
+                <img class="profile" src="../icon/profilerb.png" alt="Profile">
+            </a>
+        </div>
        
     </div>
 
