@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- Navigation Section -->
-    <div class="header">
+    <div class="top-section">
         <img class="logo" src="icon/logo.jpeg" alt="Logo">
         <nav>
             <ul>
