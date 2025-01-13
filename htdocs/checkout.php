@@ -20,16 +20,22 @@ if (empty($selectedItems)) {
 // Fetch details of selected items from the cart
 try {
     $placeholders = implode(',', array_fill(0, count($selectedItems), '?'));
-    $stmt = $pdo->prepare("
-        SELECT p.product_id, p.name, p.price, p.image, c.quantity
-        FROM cart c
-        JOIN products p ON c.product_id = p.product_id
-        WHERE c.user_id = ? AND c.product_id IN ($placeholders)
-    ");
+    $stmt = $pdo->prepare("SELECT p.product_id, p.name, p.price, p.image, c.quantity
+                           FROM cart c
+                           JOIN products p ON c.product_id = p.product_id
+                           WHERE c.user_id = ? AND c.product_id IN ($placeholders)");
     $stmt->execute(array_merge([$user_id], $selectedItems));
     $itemsToCheckout = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("Database query failed: " . $e->getMessage());
+}
+
+// Function to resolve image paths
+function getImagePath($image) {
+    $basePath = 'uploads/';
+    return !empty($image) && file_exists($basePath . $image) 
+        ? $basePath . htmlspecialchars($image) 
+        : 'icon/placeholder.png';
 }
 ?>
 
@@ -69,11 +75,15 @@ try {
                 <?php
                 $total = 0;
                 foreach ($itemsToCheckout as $item) {
+                    // Get the resolved image path
+                    $imagePath = getImagePath($item['image']);
+
                     $itemTotal = $item['price'] * $item['quantity'];
                     $total += $itemTotal;
+
                     echo "
                         <div class='laksa-item'>
-                            <img src='" . htmlspecialchars($item['image']) . "' alt='" . htmlspecialchars($item['name']) . "'>
+                            <img src='$imagePath' alt='" . htmlspecialchars($item['name']) . "' class='product-image'>
                             <div>
                                 <p><strong>" . htmlspecialchars($item['name']) . "</strong></p>
                                 <p>Quantity: " . $item['quantity'] . "</p>
