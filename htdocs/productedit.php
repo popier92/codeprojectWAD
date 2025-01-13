@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['new_category'])) {
         <div class="dashboard-welcome">
                <h1>Welcome To Product Edit Page</h1>
            </div>
-        <a href="profile.html">
+        <a href="adprofileedit.php">
             <img class="profile" src="icon/profilerb.png" alt="Profile">
         </a>
     </div>
