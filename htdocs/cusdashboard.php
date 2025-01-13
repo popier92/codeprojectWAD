@@ -39,78 +39,6 @@ foreach ($products as $product) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/cusdashboard.css">
     <title>Customer Main Page</title>
-    <style>
-        .categories {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-
-        .category-item {
-            background-color: #f9f9f9;
-            padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .category-item:hover {
-            background-color: #f4b0b0;
-            color: white;
-        }
-
-        .dish-grid .dish-item {
-            display: none;
-        }
-
-        #popular-dishes-title {
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        #no-results {
-            display: none;
-            text-align: center;
-            font-weight: bold;
-            color: #f00;
-            margin-top: 20px;
-        }
-
-        .search-container {
-    display: flex;
-    align-items: center;
-
-}
-
-#search-bar {
-    flex: 1;
-    padding: 10px 120px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    outline: none;
-}
-
-#search-button {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search-icon {
-    width: 24px;
-    height: 24px;
-}
-
-
-    </style>
 </head>
 <body>
     <div class="container">
@@ -164,7 +92,7 @@ foreach ($products as $product) {
             <?php foreach ($products as $product): ?>
     <div class="dish-item" data-category="<?php echo htmlspecialchars($product['category_name']); ?>">
         <div class="image-placeholder">
-            <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+        <img src="<?php echo (!empty($product['image']) && file_exists('uploads/' . $product['image'])) ? 'uploads/' . htmlspecialchars($product['image']) : 'icon/default-placeholder.png'; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
         </div>
         <p><?php echo htmlspecialchars($product['name']); ?></p>
         <strong>RM <?php echo number_format($product['price'], 2); ?></strong>
