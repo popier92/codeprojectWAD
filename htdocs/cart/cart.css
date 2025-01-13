@@ -173,3 +173,32 @@
                 width: 90%;
             }
         }
+
+        /* Minus and Add Button */
+.cart-item-actions button {
+    background-color: #f0f0f0; /* Light gray background */
+    border: 1px solid #ccc; /* Border with light gray color */
+    border-radius: 4px; /* Slightly rounded corners */
+    padding: 5px 10px; /* Space inside the button */
+    font-size: 14px; /* Font size for text or symbols */
+    cursor: pointer; /* Pointer cursor for better UX */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.cart-item-actions button:hover {
+    background-color: #dcdcdc; /* Darker gray on hover */
+    color: #333; /* Dark text on hover */
+}
+
+/* Delete Button */
+.cart-item-actions button:last-child {
+    background-color: #f44336; /* Red background for delete button */
+    color: white; /* White text */
+    border: none; /* No border for delete button */
+    padding: 5px 15px; /* Slightly larger padding */
+}
+
+.cart-item-actions button:last-child:hover {
+    background-color: #e53935; /* Darker red on hover */
+    color: white; /* Ensure text stays white */
+}
