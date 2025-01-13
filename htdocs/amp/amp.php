@@ -228,6 +228,7 @@ $categories = $categoriesStmt->fetchAll(PDO::FETCH_ASSOC);
                     card.style.display = 'none';
                 }
             });
+        }
     </script>
 </body>
 </html>
