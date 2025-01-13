@@ -65,7 +65,7 @@
         $servername = "sql209.infinityfree.com";
         $username = "if0_38042508";
         $password = "OPhQ0F3THq6o2C";
-        $dbname = "if0_38042508_db_systemm";
+        $dbname = "if0_38042508_db_system";
 
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
