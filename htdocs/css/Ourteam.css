@@ -11,13 +11,18 @@ body {
 }
 
 /* Header Section */
-.header {
+.top-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     background-color: #ffe6e6;
+    border-radius: 120px;
+    width: 1400px;
     box-shadow: 0 4px 10px rgba(255, 148, 168, 0.9);
+    margin-left: 4%;
+    margin-right: auto;
+    
 }
 
 .logo {
