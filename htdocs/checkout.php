@@ -49,10 +49,10 @@ try {
         <nav>
             <ul>
                 <li><a href="cusdashboard.php">Home</a></li>
-                <li><a href="team.html">Our Team</a></li>
+                <li><a href="Ourteam.php">Our Team</a></li>
                 <li><a href="cart/cart.php">Cart</a></li>
-                <li><a href="transactions.html">Transaction Details</a></li>
-                <li><a href="help.html">Help</a></li>
+                <li><a href="transaction.php">Transaction Details</a></li>
+                <li><a href="QnA.php">Help</a></li>
             </ul>
         </nav>
         <a href="profile.html">
