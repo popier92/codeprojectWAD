@@ -137,6 +137,13 @@
             gap: 5px;
         }
 
+        /* Checkbox Styling */
+.cart-checkbox {
+    margin-right: 15px; /* Add space between checkbox and image */
+    transform: scale(1.2); /* Optional: Increase checkbox size for better visibility */
+    cursor: pointer; /* Add pointer cursor for better user experience */
+    vertical-align: middle; /* Align checkbox with the image */
+}
 
 
         .checkout-tab h2 {
