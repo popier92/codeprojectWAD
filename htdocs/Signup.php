@@ -25,11 +25,6 @@
             <div class="button-container">
                 <a href="index.php" class="button">Login</a>
                 <button class="button2" type="submit" name="Confirm">Confirm</button>
-                <label for="role">Role</label>
-            <select id="role" name="Role" required>
-                <option value="customer" selected>Customer</option>
-                <option value="admin">Admin</option>
-            </select>
             </div>
         </form>
     </div>
@@ -53,15 +48,13 @@
             }
 
             if (password !== confirmPassword) {
-                alert('Passwords do not match');
+                alert('Passwords do not match.');
                 event.preventDefault();
             }
         });
     </script>
 
     <?php
-    include 'asset/connect.php';
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Database connection details
         $servername = "sql209.infinityfree.com";
@@ -81,7 +74,6 @@
         $email = $conn->real_escape_string($_POST['Email']);
         $password = $_POST['Password'];
         $confirmPassword = $_POST['ConfirmPassword'];
-        $role = $conn->real_escape_string($_POST['Role']);
 
         // Server-side validation
         if ($password !== $confirmPassword) {
@@ -91,7 +83,7 @@
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert user into the database
-            $sql = "INSERT INTO users (email, password_hash, role) VALUES ('$email', '$hashedPassword', '$role')";
+            $sql = "INSERT INTO users (email, password_hash) VALUES ('$email', '$hashedPassword')";
 
             if ($conn->query($sql) === TRUE) {
                 echo "<script>alert('Sign up successful!'); window.location.href = 'index.php';</script>";
